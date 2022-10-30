@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Aphorisms for {{ aphorisms[1] }}</title>
+    <link href="{{ url_for('static', filename='tacit-css-1.5.5.min.css') }}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Aphorisms for {{ aphorisms[1] }}</h1>
+    <ol>
+      {% for aphorism in aphorisms[0] %}
+      <li>{{ aphorism }}</li>
+      {% endfor %}
+    </ol>
+    <p><a href="/">More Zeitgeisty Aphorisms</a></p>
+  </body>
+  </html>

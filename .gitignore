@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# docs, aphorisms
+docs/*
+aphorisms/*
+
+twitter_creds.py
+W2Vmodel
+pickled_kws.pkl

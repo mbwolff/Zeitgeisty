@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Zeitgeisty Aphorisms</title>
+    <link href="{{ url_for('static', filename='tacit-css-1.5.5.min.css') }}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Zeitgeisty Aphorisms</h1>
+    <p>Listicles of Internet wisdom.</p>
+    <ul>
+      {% for day in days %}
+      <li><a href="aphorisms/{{ day[0] }}">{{ day[1] }}</a></li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
