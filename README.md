@@ -2,6 +2,8 @@
 
 This is a bot that generates daily aphorisms from news headlines and Twitter commentary. It is based on an idea by the Oulipo for inventing formulas for aphorisms and using a computer to insert nouns and verbs into the formulas. The bot finds words in a Word2Vec model constructed from the headlines and tweets. In this way it offers a *zeitgeist* that emerges from the Internet.
 
+[Check it out](https://zeitgeisty.markwolff.name)!
+
 ## Setup
 
 1. Install `Python 3.8` (as a virtual or Paas environment).
