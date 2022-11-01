@@ -14,9 +14,9 @@ This is a bot that generates daily aphorisms from news headlines and Twitter com
 8. Run `pruneDocs.py` to eventually delete news and Twitter content that is 90 days old.
 9. Run `generateAphorisms.py` for a list of around 200 aphorisms. The code is parameterized to generate a total of 50,000 words in 30 days for NaNoGenMo 2022.
 10. Here is a sample crontab file to automate things:
-`# IMPORTANT NOTE!
-# Please make sure there is a blank line after the last cronjob entry.
-0 2,14 * * * /your/path/to/Zeitgeisty/getDocs.py
-30 2 * * * /your/path/to/Zeitgeisty/pruneDocs.py
-0 3 * * * /your/path/to/Zeitgeisty/buildModel.py
-0 4 * * * /your/path/to/Zeitgeisty/generateAphorisms.py`
+`# IMPORTANT NOTE!`
+`# Please make sure there is a blank line after the last cronjob entry.`
+`0 2,14 * * * /your/path/to/Zeitgeisty/getDocs.py`
+`30 2 * * * /your/path/to/Zeitgeisty/pruneDocs.py`
+`0 3 * * * /your/path/to/Zeitgeisty/buildModel.py`
+`0 4 * * * /your/path/to/Zeitgeisty/generateAphorisms.py`
