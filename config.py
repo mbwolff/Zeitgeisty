@@ -5,11 +5,15 @@ Copying and distribution of this file, with or without modification, are
 permitted in any medium without royalty provided the copyright notice and
 this notice are preserved. This file is offered as-is, without any warranty.
 """
+import os
 
-pickled_doc_dir = "/Users/mark/Research/2022NaNoGenMo/Zeitgeisty/docs"
-pickled_kw_dict_file = "/Users/mark/Research/2022NaNoGenMo/Zeitgeisty/pickled_kws.pkl"
-model_file = "/Users/mark/Research/2022NaNoGenMo/NaNoGenMo2022/Zeitgeisty/W2Vmodel"
-aphorisms_dir = "/Users/mark/Research/2022NaNoGenMo/NaNoGenMo2022/Zeitgeisty/aphorisms"
+package_dir = os.path.dirname(os.path.abspath(__file__))
+
+pickled_doc_dir = os.path.join(package_dir, "docs")
+pickled_kw_dict_file = os.path.join(package_dir, "pickled_kws.pkl")
+model_file = os.path.join(package_dir, "W2Vmodel")
+aphorisms_dir = os.path.join(package_dir, "aphorisms")
+
 tweet_count = 10
 min_kw_count = 5
 common_words = ["day", "time", "say", "break", "#", "get", "year", "thing",
