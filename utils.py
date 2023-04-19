@@ -140,10 +140,7 @@ def parse(docs):
         text = docs[idx]['text']
         for token in trigrams[idx]:
             if token != None and '____' in token:
-                replacement = ' '
-                if token.startswith('#'):
-                    replacement = ''
-                string = token.replace('____', replacement)
+                string = token.replace('____', ' ')
                 text = text.replace(string, token)
         docs[idx]['parsed'] = nlp(text) # with POS tags
 
