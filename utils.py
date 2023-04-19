@@ -121,6 +121,8 @@ def parse(docs):
         ppd = list()
         for token in parsed_doc:
             string = token.text
+            if string == '#':
+                string = 'MarkMark'
             if token.pos_ not in { 'PROPN' }:
                 string = string.lower()
             if token.pos_ not in { 'PUNCT' }:
@@ -141,6 +143,7 @@ def parse(docs):
         text = docs[idx]['text']
         for token in trigrams[idx]:
             if token != None and '____' in token:
+                string = token.replace('MarkMark____', '#')
                 string = token.replace('____', ' ')
                 text = text.replace(string, token)
         docs[idx]['parsed'] = nlp(text) # with POS tags

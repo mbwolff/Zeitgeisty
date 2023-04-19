@@ -6,6 +6,7 @@ __pycache__/
 # docs, aphorisms
 docs/*
 aphorisms/*
+env/
 
 twitter_creds.py
 W2Vmodel
