@@ -19,7 +19,7 @@ min_kw_count = 5
 common_words = ["day", "time", "say", "break", "#", "get", "year", "thing",
     "people", "know", "agree", "think", "take", "go", "tell", "work", "end",
     "want", "need", "today", "question", "play", "stop", "watch", "-", "ask",
-    "state", "look", "help", "%", "see", "try", "account", "come", ".", "#",
+    "state", "look", "help", "%", "see", "try", "account", "come", ".",
     "up", "f", "/", "amp", "&", "miss", "down", "'", "way", "\"", '+', '!',
     "man", "case", ":", "put", "word", "week", "month", "in", ",", "\(", "\)",
     "_"]
