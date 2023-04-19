@@ -100,6 +100,7 @@ def modify_lemma(tup):
         if string in determined_proper_nouns:
             string = 'the____' + string
     string = string.replace('____', ' ')
+    string = string.replace('HHHHH ', '#')
     return string
 
 def build_kw_dict(docs, kw_dict):
