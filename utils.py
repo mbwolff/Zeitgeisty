@@ -159,7 +159,12 @@ class MySentences(object):
                 pickleFile = open(os.path.join(self.dirname, fname), 'rb')
                 docs = pickle.load(pickleFile)
                 for sent in [ doc['parsed'] for doc in docs ]:
-                    yield [ token.lemma_ for token in sent ]
+                    for token in sent:
+                        string = token.lemma_
+                        if token.lemma_ == '#':
+                            string = 'HHHHH'
+                        yield string
+#                    yield [ token.lemma_ for token in sent ]
 
 class MyDocs(object):
     def __init__(self, dirname):
