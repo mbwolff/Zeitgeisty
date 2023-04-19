@@ -119,8 +119,13 @@ def parse(docs):
     preprocessed_docs = list()
     for parsed_doc in parsed_docs:
         ppd = list()
-        for token in parsed_doc:
+        for idx in range(len(parsed_doc)):
+#        for token in parsed_doc:
+            token = parsed_doc[idx]
             string = token.text
+            if string == '#':
+                idx += 1
+                string = string + parsed_doc[idx].text
 #            if string == '#':
 #                string = 'MarkMark'
             if token.pos_ not in { 'PROPN' }:
