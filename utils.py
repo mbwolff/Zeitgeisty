@@ -168,7 +168,7 @@ class MySentences(object):
                     lemmas = list()
                     for idx in range(len(sent)-1):
                         if sent[idx].lemma_ == '#':
-                            lemmas.append(sent[idx].lemma_ + sent[idx+1].lemma_)
+                            lemmas.append('HASHTAG__' + sent[idx+1].lemma_)
                             idx += 1
                         else:
                             lemmas.append(sent[idx].lemma_)
@@ -191,5 +191,13 @@ class MyDocs(object):
                     else:
                         tweets = tweets + 1
                 for sent in [ doc['parsed'] for doc in docs ]:
-                    yield sent
+                    lemmas = list()
+                    for idx in range(len(sent)-1):
+                        if sent[idx].lemma_ == '#':
+                            lemmas.append('HASHTAG__' + sent[idx+1].lemma_)
+                            idx += 1
+                        else:
+                            lemmas.append(sent[idx].lemma_)
+                    yield lemmas
+#                    yield sent
         print("Headlines: " + str(headlines) + ", Tweets: " + str(tweets))
