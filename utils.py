@@ -116,7 +116,7 @@ def build_kw_dict(docs, kw_dict):
 
 def parse(docs):
     for doc in docs:
-        re.sub('#','HASHTAG__',doc['text'])
+        re.sub("\#",'HASHTAG__',doc['text'])
     parsed_docs = [ nlp(doc['text']) for doc in docs ]
     preprocessed_docs = list()
     for parsed_doc in parsed_docs:
