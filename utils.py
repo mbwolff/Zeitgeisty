@@ -194,7 +194,7 @@ class MyDocs(object):
                     limit = len(sent) - 1
                     for idx in range(limit):
                         if sent[idx].lemma_ == '#':
-                            sent[idx+1].text = 'HASHTAG__' + sent[idx+1].text
+#                            sent[idx+1].text = 'HASHTAG__' + sent[idx+1].text
                             sent[idx+1].lemma_ = 'HASHTAG__' + sent[idx+1].lemma_
                             sent.pop(idx)
                             idx -= 1
