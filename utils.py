@@ -100,7 +100,8 @@ def modify_lemma(tup):
         if string in determined_proper_nouns:
             string = 'the____' + string
     string = string.replace('____', ' ')
-    string = string.replace('HASHTAG__', '#')
+#    string = string.replace('HASHTAG__', '#')
+    string = re.sub("HASHTAG__\s*", "\#", string)
     return string
 
 def build_kw_dict(docs, kw_dict):
@@ -128,8 +129,6 @@ def parse(docs):
             if string == '#':
                 idx += 1
                 string = string + parsed_doc[idx].text
-#            if string == '#':
-#                string = 'MarkMark'
             if token.pos_ not in { 'PROPN' }:
                 string = string.lower()
             if token.pos_ not in { 'PUNCT' }:
@@ -167,14 +166,6 @@ class MySentences(object):
                 pickleFile = open(os.path.join(self.dirname, fname), 'rb')
                 docs = pickle.load(pickleFile)
                 for sent in [ doc['parsed'] for doc in docs ]:
-#                    lemmas = list()
-#                    for idx in range(len(sent)-1):
-#                        if sent[idx].lemma_ == '#':
-#                            lemmas.append('HASHTAG__' + sent[idx+1].lemma_)
-#                            idx += 1
-#                        else:
-#                            lemmas.append(sent[idx].lemma_)
-#                    yield lemmas
                     yield [ token.lemma_ for token in sent ]
 
 class MyDocs(object):
@@ -193,12 +184,5 @@ class MyDocs(object):
                     else:
                         tweets = tweets + 1
                 for sent in [ doc['parsed'] for doc in docs ]:
-#                    limit = len(sent) - 1
-#                    for idx in range(limit):
-#                        if sent[idx].lemma_ == '#':
-##                            sent[idx+1].text = 'HASHTAG__' + sent[idx+1].text
-#                            sent[idx+1].lemma_ = 'HASHTAG__' + sent[idx+1].lemma_
-#                            sent.pop(idx)
-#                            idx -= 1
                     yield sent
         print("Headlines: " + str(headlines) + ", Tweets: " + str(tweets))
