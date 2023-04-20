@@ -100,7 +100,7 @@ def modify_lemma(tup):
         if string in determined_proper_nouns:
             string = 'the____' + string
     string = string.replace('____', ' ')
-    string = string.replace('HHHHH ', '#')
+    string = string.replace('HASHTAG__', '#')
     return string
 
 def build_kw_dict(docs, kw_dict):
@@ -191,13 +191,13 @@ class MyDocs(object):
                     else:
                         tweets = tweets + 1
                 for sent in [ doc['parsed'] for doc in docs ]:
-                    lemmas = list()
-                    for idx in range(len(sent)-1):
-                        if sent[idx].lemma_ == '#':
-                            lemmas.append('HASHTAG__' + sent[idx+1].lemma_)
-                            idx += 1
-                        else:
-                            lemmas.append(sent[idx].lemma_)
-                    yield lemmas
-#                    yield sent
+#                    lemmas = list()
+#                    for idx in range(len(sent)-1):
+#                        if sent[idx].lemma_ == '#':
+#                            lemmas.append('HASHTAG__' + sent[idx+1].lemma_)
+#                            idx += 1
+#                        else:
+#                            lemmas.append(sent[idx].lemma_)
+#                    yield lemmas
+                    yield sent
         print("Headlines: " + str(headlines) + ", Tweets: " + str(tweets))
