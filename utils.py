@@ -191,13 +191,12 @@ class MyDocs(object):
                     else:
                         tweets = tweets + 1
                 for sent in [ doc['parsed'] for doc in docs ]:
-#                    lemmas = list()
-#                    for idx in range(len(sent)-1):
-#                        if sent[idx].lemma_ == '#':
-#                            lemmas.append('HASHTAG__' + sent[idx+1].lemma_)
-#                            idx += 1
-#                        else:
-#                            lemmas.append(sent[idx].lemma_)
-#                    yield lemmas
+                    limit = len(sent) - 1
+                    for idx in range(limit):
+                        if sent[idx].lemma_ == '#':
+                            sent[idx+1].text = 'HASHTAG__' + sent[idx+1].text
+                            sent[idx+1].lemma_ = 'HASHTAG__' + sent[idx+1].lemma_
+                            sent.pop(idx)
+                            idx -= 1
                     yield sent
         print("Headlines: " + str(headlines) + ", Tweets: " + str(tweets))
