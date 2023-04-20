@@ -7,7 +7,7 @@ this notice are preserved. This file is offered as-is, without any warranty.
 """
 
 from utils import build_kw_dict, parse
-from config import pickled_doc_dir, model_file, tweet_count, min_kw_count
+from config import pickled_doc_dir, tweet_count, min_kw_count
 
 # The file twitter_creds.py needs to be created in order to use tweepy
 # and access Twitter.
