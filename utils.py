@@ -117,7 +117,7 @@ def build_kw_dict(docs, kw_dict):
 
 def parse(docs):
     for doc in docs:
-        doc['text'] = re.sub("\#",'HASHTAG__',doc['text'])
+        doc['text'] = re.sub("#",'HASHTAG__',doc['text'])
     parsed_docs = [ nlp(doc['text']) for doc in docs ]
     preprocessed_docs = list()
     for parsed_doc in parsed_docs:
@@ -149,7 +149,6 @@ def parse(docs):
         text = docs[idx]['text']
         for token in trigrams[idx]:
             if token != None and '____' in token:
-#                string = token.replace('MarkMark____', '#')
                 string = token.replace('____', ' ')
                 text = text.replace(string, token)
         docs[idx]['parsed'] = nlp(text) # with POS tags
