@@ -20,4 +20,4 @@ f.close()
 
 for aphor in aphors:
     if not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
-        print(aphor)
+        print(rstrip(aphor))
