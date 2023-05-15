@@ -15,7 +15,7 @@ import os, re, tweepy
 
 authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
 authenticate.set_access_token(access_token, access_token_secret)
-api = tweepy.API(authenticate, wait_on_rate_limit=True, compression=True)
+api = tweepy.API(authenticate, wait_on_rate_limit=True)
 
 aphor_files = os.listdir(aphorisms_dir)
 aphor_files.sort()
