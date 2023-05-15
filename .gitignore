@@ -9,5 +9,6 @@ aphorisms/*
 env/
 
 twitter_creds.py
+twitter_credsPost.py
 W2Vmodel
 pickled_kws.pkl
