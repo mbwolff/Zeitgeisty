@@ -102,7 +102,7 @@ def modify_lemma(tup):
     string = string.replace('____', ' ')
 #    string = string.replace('HASHTAG__', '#')
     string = re.sub("HASHTAG__", "#", string)
-    string = re.sub("#\s+", "#", string)
+    string = re.sub('#\s+', '#', string)
     return string
 
 def build_kw_dict(docs, kw_dict):
