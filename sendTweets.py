@@ -37,7 +37,7 @@ for aphor in aphors:
     elif not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
 #        print(aphor.rstrip())
 #        api.update_status(status=aphor.rstrip())
-        aphor += 'For more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu'
+        aphor += '"\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu"
         response = client.create_tweet(text=aphor.rstrip())
         print(f"https://twitter.com/user/status/{response.data['id']}")
         sleep(1800) # wait 30 minutes
