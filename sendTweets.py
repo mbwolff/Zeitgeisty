@@ -13,9 +13,14 @@ from config import aphorisms_dir, package_dir
 from time import time, sleep
 import os, re, tweepy
 
-authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
-authenticate.set_access_token(access_token, access_token_secret)
-api = tweepy.API(authenticate, wait_on_rate_limit=True)
+#authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
+#authenticate.set_access_token(access_token, access_token_secret)
+#api = tweepy.API(authenticate, wait_on_rate_limit=True)
+
+client = tweepy.Client(
+    consumer_key=consumer_key, consumer_secret=consumer_secret,
+    access_token=access_token, access_token_secret=access_token_secret
+)
 
 aphor_files = os.listdir(aphorisms_dir)
 aphor_files.sort()
@@ -29,5 +34,7 @@ for aphor in aphors:
         break
     elif not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
 #        print(aphor.rstrip())
-        api.update_status(status=aphor.rstrip())
-        sleep(900) # wait 15 minutes
+#        api.update_status(status=aphor.rstrip())
+        response = client.create_tweet(text=aphor.rstrip())
+        print(f"https://twitter.com/user/status/{response.data['id']}")
+        sleep(1800) # wait 30 minutes
