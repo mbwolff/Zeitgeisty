@@ -30,7 +30,7 @@ f.close()
 
 start = time()
 for aphor in aphors:
-    if time() - start >= 85500: # send tweets for 23h45m
+    if time() - start >= 84600: # send tweets for 23h30m
         break
     elif not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
 #        print(aphor.rstrip())
