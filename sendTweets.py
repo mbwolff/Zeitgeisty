@@ -10,7 +10,7 @@ this notice are preserved. This file is offered as-is, without any warranty.
 # and access Twitter.
 from twitter_credsPost import consumer_key, consumer_secret, access_token, access_token_secret
 from config import aphorisms_dir, package_dir
-from time import time, sleep
+from time import localtime, sleep
 import os, re, tweepy
 
 #authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -28,13 +28,16 @@ f = open(os.path.join(package_dir, 'aphorisms', aphor_files[-1]), 'r')
 aphors = f.readlines()
 f.close()
 
-start = time()
+#start = time()
 for aphor in aphors:
-    if time() - start >= 84600: # send tweets for 23h30m
+    r = localtime()
+    if r.tm_hour == 3 and r.tm_min >= 15:
+#    if time() - start >= 84600: # send tweets for 23h30m
         break
     elif not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
 #        print(aphor.rstrip())
 #        api.update_status(status=aphor.rstrip())
+        aphor += 'For more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu'
         response = client.create_tweet(text=aphor.rstrip())
         print(f"https://twitter.com/user/status/{response.data['id']}")
         sleep(1800) # wait 30 minutes
