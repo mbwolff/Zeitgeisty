@@ -40,5 +40,5 @@ for aphor in aphors:
             response = client.create_tweet(text=aphor.rstrip())
             print(f"https://twitter.com/user/status/{response.data['id']}")
             sleep(1800) # wait 30 minutes
-        except Exception, e:
+        except Exception:
             pass
