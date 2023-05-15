@@ -34,8 +34,11 @@ for aphor in aphors:
     if r.tm_hour == 3 and r.tm_min >= 15:
         break
     elif not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
-        aphor = re.sub('#\s+', '#', aphor)
-        aphor += "\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu."
-        response = client.create_tweet(text=aphor.rstrip())
-        print(f"https://twitter.com/user/status/{response.data['id']}")
-        sleep(1800) # wait 30 minutes
+        try:
+            aphor = re.sub('#\s+', '#', aphor)
+            aphor += "\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu."
+            response = client.create_tweet(text=aphor.rstrip())
+            print(f"https://twitter.com/user/status/{response.data['id']}")
+            sleep(1800) # wait 30 minutes
+        except Exception, e:
+            pass
