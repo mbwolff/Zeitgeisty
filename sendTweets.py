@@ -10,6 +10,7 @@ this notice are preserved. This file is offered as-is, without any warranty.
 # and access Twitter.
 from twitter_creds import bearer_token, consumer_key, consumer_secret, access_token, access_token_secret
 from config import aphorisms_dir, package_dir
+from time import time, sleep
 import os, re, tweepy
 
 aphor_files = os.listdir(aphorisms_dir)
@@ -18,6 +19,10 @@ f = open(os.path.join(package_dir, 'aphorisms', aphor_files[-1]), 'r')
 aphors = f.readlines()
 f.close()
 
+start = time()
 for aphor in aphors:
-    if not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
+    if time() - start >= 85500: # send tweets for 23h45m
+        break
+    elif not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
         print(aphor.rstrip())
+        sleep(5) # 15 minutes
