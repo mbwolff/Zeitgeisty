@@ -111,8 +111,12 @@ else:
             hc = send_query(aphor)
             r = dict()
             for i in range(1):
-                r[hc[0][i]['label']] = hc[0][i]['score']
-            if r['nothate'] >= 0.5:
+                try:
+                    r[hc[0][i]['label']] = hc[0][i]['score']
+                except:
+                    r['hate'] = r['nothate'] = None
+                    continue
+            if r['nothate'] >= 0.5 or r['hate'] == None:
                 print(aphor, file=f)
             else:
                 print("Hate score of " + str(r['hate']) + " for: " + aphor)
