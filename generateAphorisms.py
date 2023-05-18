@@ -116,7 +116,7 @@ else:
                 except:
                     r['hate'] = r['nothate'] = None
                     continue
-            if r['nothate'] >= 0.5 or r['hate'] == None:
+            if r['hate'] is None or r['nothate'] <= 0.5:
                 print(aphor, file=f)
             else:
                 print("Hate score of " + str(r['hate']) + " for: " + aphor)
