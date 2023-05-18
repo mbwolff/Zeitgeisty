@@ -51,8 +51,9 @@ for aphor in aphors:
 #                    print("i="+str(i))
                     r['hate'] = r['nothate'] = None
             if r['hate'] == None or r['nothate'] <= 0.5:
-                response = client.create_tweet(text=aphor.rstrip())
-                print(f"https://twitter.com/user/status/{response.data['id']}")
+#                response = client.create_tweet(text=aphor.rstrip())
+#                print(f"https://twitter.com/user/status/{response.data['id']}")
+                print(aphor.rstrip())
                 sleep(1800) # wait 30 minutes
             else:
                 print("Hate score of " + str(r['hate']) + " for: " + aphor)
