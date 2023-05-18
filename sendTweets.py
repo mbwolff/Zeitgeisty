@@ -38,6 +38,7 @@ for aphor in aphors:
         try:
             aphor = re.sub('#\s+', '#', aphor)
 #            aphor += "\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu."
+            print("Checking: " + aphor)
             hc = send_query(aphor)
             r = dict()
             for i in range(1):
