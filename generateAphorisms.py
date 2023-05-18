@@ -114,8 +114,8 @@ else:
                 try:
                     r[hc[0][i]['label']] = hc[0][i]['score']
                 except:
-#                    pprint.pprint(hc)
-#                    pprint.pprint(r)
+                    pprint.pprint(hc)
+                    pprint.pprint(r)
 #                    print("i="+str(i))
                     r['hate'] = r['nothate'] = None
                     break
