@@ -12,6 +12,7 @@ from twitter_credsPost import consumer_key, consumer_secret, access_token, acces
 from config import aphorisms_dir, package_dir
 from time import localtime, sleep
 from utils import send_query
+from pprint import pprint
 import os, re, tweepy
 
 #authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -38,8 +39,9 @@ for aphor in aphors:
         try:
             aphor = re.sub('#\s+', '#', aphor)
 #            aphor += "\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu."
-            print("Checking: " + aphor)
+#            print("Checking: " + aphor)
             hc = send_query(aphor)
+            pprint(hc)
             r = dict()
             for i in range(1):
                 try:
