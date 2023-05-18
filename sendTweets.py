@@ -11,6 +11,7 @@ this notice are preserved. This file is offered as-is, without any warranty.
 from twitter_credsPost import consumer_key, consumer_secret, access_token, access_token_secret
 from config import aphorisms_dir, package_dir
 from time import localtime, sleep
+from utils import send_query
 import os, re, tweepy
 
 #authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -37,8 +38,23 @@ for aphor in aphors:
         try:
             aphor = re.sub('#\s+', '#', aphor)
 #            aphor += "\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu."
-            response = client.create_tweet(text=aphor.rstrip())
-            print(f"https://twitter.com/user/status/{response.data['id']}")
-            sleep(1800) # wait 30 minutes
+            hc = send_query(aphor)
+            r = dict()
+            for i in range(1):
+                try:
+                    r[hc[0][i]['label']] = hc[0][i]['score']
+                    if not re.search('hate', hc[0][i]['label']):
+                        r['hate'] = r['nothate'] = None
+                except:
+                    pprint(hc)
+                    pprint(r)
+#                    print("i="+str(i))
+                    r['hate'] = r['nothate'] = None
+            if r['hate'] == None or r['nothate'] <= 0.5:
+                response = client.create_tweet(text=aphor.rstrip())
+                print(f"https://twitter.com/user/status/{response.data['id']}")
+                sleep(1800) # wait 30 minutes
+            else:
+                print("Hate score of " + str(r['hate']) + " for: " + aphor)
         except Exception:
             pass

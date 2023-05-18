@@ -109,19 +109,4 @@ else:
     with open(os.path.join(aphorisms_dir, str_date_time + '_aphorisms.txt'), 'w') as f:
         print("Here are the aphorisms from " + str(date_time) + "\n", file=f)
         for aphor in aphorisms:
-            hc = send_query(aphor)
-            r = dict()
-            for i in range(1):
-                try:
-                    r[hc[0][i]['label']] = hc[0][i]['score']
-                    if not re.search('hate', hc[0][i]['label']):
-                        r['hate'] = r['nothate'] = None
-                except:
-                    pprint(hc)
-                    pprint(r)
-#                    print("i="+str(i))
-                    r['hate'] = r['nothate'] = None
-            if r['hate'] == None or r['nothate'] <= 0.5:
-                print(aphor, file=f)
-            else:
-                print("Hate score of " + str(r['hate']) + " for: " + aphor)
+            print(aphor, file=f)
