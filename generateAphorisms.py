@@ -119,7 +119,6 @@ else:
                     pprint(r)
 #                    print("i="+str(i))
                     r['hate'] = r['nothate'] = None
-                    break
             if r['hate'] == None or r['nothate'] <= 0.5:
                 print(aphor, file=f)
             else:
