@@ -111,7 +111,7 @@ else:
             hc = send_query(aphor)
             r = dict()
             for i in range(1):
-                r[hc[0][i]['label']] = r[hc[0][i]['score']]
+                r[hc[0][i]['label']] = hc[0][i]['score']
             if r['nothate'] >= 0.5:
                 print(aphor, file=f)
             else:

@@ -9,6 +9,7 @@ this notice are preserved. This file is offered as-is, without any warranty.
 from gensim.models.phrases import Phrases, ENGLISH_CONNECTOR_WORDS
 from config import common_words, odd_verbs, keep_final_e_verbs, determined_proper_nouns
 from pronouncing import phones_for_word, stresses
+from HF_creds import HF_API_headers # get this from HuggingFace
 import re, pprint, spacy, os, pickle, requests
 
 HF_API_URL = "https://api-inference.huggingface.co/models/facebook/roberta-hate-speech-dynabench-r4-target"
@@ -159,7 +160,6 @@ def parse(docs):
     return docs
 
 def query(payload):
-    from HF_creds import HF_API_headers # get this from HuggingFace
     response = requests.post(HF_API_URL, headers=HF_API_headers, json=payload)
     return response.json()
 
