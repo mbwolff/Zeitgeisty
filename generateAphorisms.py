@@ -114,11 +114,11 @@ else:
                 try:
                     r[hc[0][i]['label']] = hc[0][i]['score']
                 except:
-                    pprint.pprint(hc)
-                    pprint.pprint(r)
-                    print("i="+str(i))
+#                    pprint.pprint(hc)
+#                    pprint.pprint(r)
+#                    print("i="+str(i))
                     r['hate'] = r['nothate'] = None
-            if r['hate'] is None or r['nothate'] <= 0.5:
+            if r['hate'] == None or r['nothate'] <= 0.5:
                 print(aphor, file=f)
             else:
                 print("Hate score of " + str(r['hate']) + " for: " + aphor)
