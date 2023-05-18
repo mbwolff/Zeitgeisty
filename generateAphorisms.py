@@ -10,7 +10,8 @@ from utils import build_kw_dict, modify_lemma, count_words, no_repeats, proofrea
 from aphor import formulas
 from config import pickled_doc_dir, pickled_kw_dict_file, model_file, tweet_count, min_kw_count, common_words, aphorisms_dir
 
-import pickle, spacy, os, pprint, random, time
+import pickle, spacy, os, random, time
+from pprint import pprint
 from gensim.models import Word2Vec
 from datetime import datetime
 
@@ -114,8 +115,8 @@ else:
                 try:
                     r[hc[0][i]['label']] = hc[0][i]['score']
                 except:
-                    pprint.pprint(hc)
-                    pprint.pprint(r)
+                    pprint(hc)
+                    pprint(r)
 #                    print("i="+str(i))
                     r['hate'] = r['nothate'] = None
                     break
