@@ -9,7 +9,9 @@ this notice are preserved. This file is offered as-is, without any warranty.
 from gensim.models.phrases import Phrases, ENGLISH_CONNECTOR_WORDS
 from config import common_words, odd_verbs, keep_final_e_verbs, determined_proper_nouns
 from pronouncing import phones_for_word, stresses
-import re, pprint, spacy, os, pickle
+import re, pprint, spacy, os, pickle, requests
+
+HF_API_URL = "https://api-inference.huggingface.co/models/facebook/roberta-hate-speech-dynabench-r4-target"
 
 nlp = spacy.load("en_core_web_trf")
 cvc = re.compile(r"([^aeiou])([aeiou])([^aeiouxy])$")
@@ -155,6 +157,22 @@ def parse(docs):
         docs[idx]['parsed'] = nlp(text) # with POS tags
 
     return docs
+
+def query(payload):
+    from HF_creds import HF_API_headers # get this from HuggingFace
+    response = requests.post(HF_API_URL, headers=HF_API_headers, json=payload)
+    return response.json()
+
+def send_query(string):
+    output = query({
+        "wait_for_model": "True",
+#        "inputs": [l[i]['tweet_text'] for i in k]
+        "inputs": string
+    })
+    return output
+
+def hate_check(aphor):
+    return send_query(aphor)
 
 class MySentences(object):
     def __init__(self, dirname):
