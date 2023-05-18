@@ -115,7 +115,6 @@ else:
                     r[hc[0][i]['label']] = hc[0][i]['score']
                 except:
                     r['hate'] = r['nothate'] = None
-                    continue
             if r['hate'] is None or r['nothate'] <= 0.5:
                 print(aphor, file=f)
             else:
