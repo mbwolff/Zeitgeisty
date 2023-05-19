@@ -109,12 +109,13 @@ while total_words < 1667:
 else:
     date_time = datetime.fromtimestamp(time.time())
     str_date_time = date_time.strftime("%Y-%m-%d_%H-%M-%S")
-    with open(os.path.join(aphorisms_dir, str_date_time + '_aphorisms.txt'), 'w') as f and open(os.path.join(hate_dir, str_date_time + '_hate_speech.txt'), 'w') as hs:
-        print("Here are the aphorisms from " + str(date_time) + "\n", file=f)
-        for aphor in aphorisms:
-            r = pipe(aphor)
-            if (r[0]['label'] == 'nothate'):
-                print(aphor, file=f)
-            else:
-                print(aphor, file=hs)
-                print(r[0]['label']+": "+str(r[0]['score']), file=hs)
+    with open(os.path.join(aphorisms_dir, str_date_time + '_aphorisms.txt'), 'w') as f:
+        with open(os.path.join(hate_dir, str_date_time + '_hate_speech.txt'), 'w') as hs:
+            print("Here are the aphorisms from " + str(date_time) + "\n", file=f)
+            for aphor in aphorisms:
+                r = pipe(aphor)
+                if (r[0]['label'] == 'nothate'):
+                    print(aphor, file=f)
+                else:
+                    print(aphor, file=hs)
+                    print(r[0]['label']+": "+str(r[0]['score']), file=hs)
