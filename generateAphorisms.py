@@ -8,7 +8,7 @@ this notice are preserved. This file is offered as-is, without any warranty.
 
 from utils import build_kw_dict, modify_lemma, count_words, no_repeats, proofread, get_pos, send_query
 from aphor import formulas
-from config import pickled_doc_dir, pickled_kw_dict_file, model_file, tweet_count, min_kw_count, common_words, aphorisms_dir
+from config import pickled_doc_dir, pickled_kw_dict_file, model_file, tweet_count, min_kw_count, common_words, aphorisms_dir, hate_dir
 
 import pickle, spacy, os, random, time, re
 from pprint import pprint
@@ -109,12 +109,12 @@ while total_words < 1667:
 else:
     date_time = datetime.fromtimestamp(time.time())
     str_date_time = date_time.strftime("%Y-%m-%d_%H-%M-%S")
-    with open(os.path.join(aphorisms_dir, str_date_time + '_aphorisms.txt'), 'w') as f:
+    with open(os.path.join(aphorisms_dir, str_date_time + '_aphorisms.txt'), 'w') as f and open(os.path.join(hate_dir, str_date_time + '_hate_speech.txt'), 'w') as hs:
         print("Here are the aphorisms from " + str(date_time) + "\n", file=f)
         for aphor in aphorisms:
             r = pipe(aphor)
             if (r[0]['label'] == 'nothate'):
                 print(aphor, file=f)
             else:
-                print(aphor)
-                print(r[0]['label']+": "+str(r[0]['score']))
+                print(aphor, file=hs)
+                print(r[0]['label']+": "+str(r[0]['score']), file=hs)

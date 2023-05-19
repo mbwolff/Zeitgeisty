@@ -13,6 +13,7 @@ pickled_doc_dir = os.path.join(package_dir, "docs")
 pickled_kw_dict_file = os.path.join(package_dir, "pickled_kws.pkl")
 model_file = os.path.join(package_dir, "W2Vmodel")
 aphorisms_dir = os.path.join(package_dir, "aphorisms")
+hate_dir = os.path.join(package_dir, "hate_speech")
 
 tweet_count = 10
 min_kw_count = 5
