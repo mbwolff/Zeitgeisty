@@ -14,6 +14,9 @@ import pickle, spacy, os, random, time, re
 from pprint import pprint
 from gensim.models import Word2Vec
 from datetime import datetime
+from transformers import pipeline
+
+pipe = pipeline(model="facebook/roberta-hate-speech-dynabench-r4-target")
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -109,4 +112,9 @@ else:
     with open(os.path.join(aphorisms_dir, str_date_time + '_aphorisms.txt'), 'w') as f:
         print("Here are the aphorisms from " + str(date_time) + "\n", file=f)
         for aphor in aphorisms:
-            print(aphor, file=f)
+            r = pipe(aphor)
+            if (r[0]['label'] == 'nothate'):
+                print(aphor, file=f)
+            else:
+                print(aphor)
+                print(r[0]['label']+": "+str(r[0]['score']))

@@ -11,7 +11,6 @@ this notice are preserved. This file is offered as-is, without any warranty.
 from twitter_credsPost import consumer_key, consumer_secret, access_token, access_token_secret
 from config import aphorisms_dir, package_dir
 from time import localtime, sleep
-from transformers import pipeline
 import os, re, tweepy
 
 #authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -22,8 +21,6 @@ client = tweepy.Client(
     consumer_key=consumer_key, consumer_secret=consumer_secret,
     access_token=access_token, access_token_secret=access_token_secret
 )
-
-pipe = pipeline(model="facebook/roberta-hate-speech-dynabench-r4-target")
 
 aphor_files = os.listdir(aphorisms_dir)
 aphor_files.sort()
@@ -38,16 +35,10 @@ for aphor in aphors:
         break
     elif not re.search('are the aphorisms', aphor) and re.search('\w', aphor):
         try:
-            aphor = re.sub('#\s+', '#', aphor.rstrip())
+            aphor = re.sub('#\s+', '#', aphor)
 #            aphor += "\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu."
-            r = pipe(aphor)
-            if (r[0]['label'] == 'nothate'):
-                response = client.create_tweet(text=aphor)
-                print(f"https://twitter.com/user/status/{response.data['id']}")
-                sleep(1800) # wait 30 minutes
-            else:
-                print(aphor)
-                print(r[0]['label']+": "+str(r[0]['score']))
+            response = client.create_tweet(text=aphor.rstrip())
+            print(f"https://twitter.com/user/status/{response.data['id']}")
+            sleep(1800) # wait 30 minutes
         except Exception:
-            print("Exception")
             pass
