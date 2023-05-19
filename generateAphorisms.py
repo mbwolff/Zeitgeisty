@@ -118,4 +118,4 @@ else:
                     print(aphor, file=f)
                 else:
                     print(aphor, file=hs)
-                    print(r[0]['label']+": "+str(r[0]['score']), file=hs)
+                    print(r[0]['label']+": "+str(r[0]['score'])+"\n", file=hs)
