@@ -15,7 +15,8 @@ This is a bot that generates daily aphorisms from news headlines and Twitter com
 7. Run `pruneDocs.py` to eventually delete news and Twitter content that is over 90 days old.
 8. Run `buildModel.py` to build the Word2Vec model from the archive in `docs/`.
 9. Run `generateAphorisms.py` for a list of around 200 aphorisms. The code is parameterized to generate a total of at least 50,000 words in 30 days for [NaNoGenMo 2022](https://github.com/NaNoGenMo/2022).
-10. Here is a sample crontab file to automate things:
+10. Run `sendTweets.py` to share the aphorisms on Twitter, one every 30 minutes.
+11. Here is a sample crontab file to automate things:
 ```
 # IMPORTANT NOTE!
 # Please make sure there is a blank line after the last cronjob entry.
@@ -23,4 +24,5 @@ This is a bot that generates daily aphorisms from news headlines and Twitter com
 30 2 * * * /your/path/to/Zeitgeisty/pruneDocs.py
 0 3 * * * /your/path/to/Zeitgeisty/buildModel.py
 0 4 * * * /your/path/to/Zeitgeisty/generateAphorisms.py
+30 4 * * * /your/path/to/Zeitgeisty/sendTweets.py
 ```
