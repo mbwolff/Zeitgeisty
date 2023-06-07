@@ -10,6 +10,7 @@ This is a bot that generates daily aphorisms from news headlines and Twitter com
 2. Install the Python modules in `requirements.txt`.
 3. Create a `docs` subfolder. This is where content from headlines and Twitter will be archived.
 4. Create an `aphorisms` subfolder. This is where lists of aphorisms  will be archived.
+5. Create a `hate_speech` subfolder. This is where aphorisms [classified as hateful] (https://huggingface.co/facebook/roberta-hate-speech-dynabench-r4-target) are archived. These aphorisms are not shared publicly.
 5. Rename `twitter_credsTEMPLATE.py` as `twitter_creds.py` and supply your personal Twitter credentials.
 6. Run `getDocs.py` to download content from news headlines and Twitter. I run this script twice a day (every twelve hours).
 7. Run `pruneDocs.py` to eventually delete news and Twitter content that is over 90 days old.
