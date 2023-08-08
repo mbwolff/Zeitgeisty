@@ -6,13 +6,6 @@ permitted in any medium without royalty provided the copyright notice and
 this notice are preserved. This file is offered as-is, without any warranty.
 """
 
-"""
-mastodon = Mastodon(client_id = 'YGVUFjJ5mkLwSsSHmE2vMhXhuyCFshfr_xUHJjVdTjg', client_secret = 'wHIr0MaK41FqzL2W3TJtinO5peqUOPptMxv6zHCsL4Y', api_base_url ='https://mastodon.social', access_token = 'iy_26q5i4kSBZHnc_OtYuy0lMG5PQS7tNV7x9IAjfZA', ratelimit_method = 'pace')
-
-In Twitter version we retrieve source and text, and with the text we generate parsed.
-The fields in Mastodon are 'url' for source and 'content' for text. We will need to strip HTML tags from content (usually <p>, <a>, <span>)
-"""
-
 from utils import build_kw_dict, parse
 from config import pickled_doc_dir, tweet_count, min_kw_count
 from mastodon import Mastodon
@@ -34,8 +27,8 @@ def get_id_from_last_set_of_docs():
     latest_docs = pickle.load(pickleFile)
     pickleFile.close()
     
-    return 110829153646426700
-#    return find_new_min_id(latest_docs)
+#    return 110829153646426700
+    return find_new_min_id(latest_docs)
 
 def no_repeat(r, i):
     for p in r:
