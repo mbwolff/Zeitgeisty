@@ -110,7 +110,7 @@ for kw, val in sorted(kw_dict.items(), key=lambda e: e[1], reverse=True):
 #        ).items(tweet_count)]
 #    toots.extend(results)
     tb = list()
-    batch = m.timeline_hashtag(kw, min_id=latest, limit=3)
+    batch = m.timeline_hashtag(kw[0], min_id=latest, limit=3)
     while batch:
         if len(tb) >= 10:
             break
