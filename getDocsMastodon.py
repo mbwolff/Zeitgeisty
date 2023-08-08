@@ -16,7 +16,7 @@ The fields in Mastodon are 'url' for source and 'content' for text. We will need
 from utils import build_kw_dict, parse
 from config import pickled_doc_dir, tweet_count, min_kw_count
 from mastodon import Mastodon
-#from pprint import pprint
+from pprint import pprint
 from bs4 import BeautifulSoup
 
 # The file twitter_creds.py needs to be created in order to use tweepy
@@ -26,6 +26,31 @@ from mastodon_creds import my_access_token, my_client_id, my_client_secret, my_a
 from pygooglenews import GoogleNews
 from datetime import datetime
 import pickle, spacy, os, tweepy, time, re, pprint
+
+def get_id_from_last_set_of_docs():
+    doc_files = os.listdir(pickled_doc_dir)
+    doc_files.sort()
+    pickleFile = open(os.path.join(pickled_doc_dir, doc_files[-1]), 'rb')
+    latest_docs = pickle.load(pickleFile)
+    pickleFile.close()
+    
+    return 110829153646426700
+#    return find_new_min_id(latest_docs)
+
+def no_repeat(r, i):
+    for p in r:
+#        pprint(p)
+        if p['id'] == i:
+            return False
+    return True
+
+def find_new_min_id(r):
+    min_id = 0
+    for p in [x for x in r if x['source'] == 'Mastodon']:
+        if p['id'] > min_id:
+            min_id = p['id']
+    return min_id
+
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -56,29 +81,53 @@ for entry in entries:
 
 parsed_headlines = parse(headlines)
 
-authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
-authenticate.set_access_token(access_token, access_token_secret)
-api = tweepy.API(authenticate, wait_on_rate_limit = True)
+#authenticate = tweepy.OAuthHandler(consumer_key, consumer_secret)
+#authenticate.set_access_token(access_token, access_token_secret)
+#api = tweepy.API(authenticate, wait_on_rate_limit = True)
+m = Mastodon(
+    client_id = my_client_id,
+    client_secret = my_client_secret,
+    api_base_url = my_api_base_url,
+    access_token = my_access_token,
+    ratelimit_method = 'pace'
+)
+latest = get_id_from_last_set_of_docs()
 
 kw_dict = build_kw_dict([ doc['parsed'] for doc in parsed_headlines ], dict())
 
-tweets = list()
+results = list()
 for kw, val in sorted(kw_dict.items(), key=lambda e: e[1], reverse=True):
     print(kw[0] + ': ' + str(val))
     if val < min_kw_count:
         continue
-    results = [
-        { 'text': tweet.full_text, 'source': tweet.id } for tweet in tweepy.Cursor(
-            api.search_tweets,
-            q=kw[0] + ' -filter:retweets',
-            lang='en',
-            result_type="mixed",
-            tweet_mode="extended"
-        ).items(tweet_count)]
-    tweets.extend(results)
+#    results = [
+ #       { 'text': tweet.full_text, 'source': tweet.id } for tweet in tweepy.Cursor(
+ #           api.search_tweets,
+#            q=kw[0] + ' -filter:retweets',
+#            lang='en',
+#            result_type="mixed",
+#            tweet_mode="extended"
+#        ).items(tweet_count)]
+#    toots.extend(results)
+    tb = list()
+    batch = m.timeline_hashtag(kw, min_id=latest, limit=3)
+    while batch:
+        if len(tb) >= 10:
+            break
+        else:
+            batch = m.fetch_next(batch)
+            for s in batch:
+#                pprint(s)
+                if s['language'] == 'en' and no_repeat(results, s['id']):
+                    string = BeautifulSoup(s['content'], "html.parser").text
+                    string = re.sub('https*://[\.\w/\-]+', '', string)
+                    tb.append({ 'source': 'Mastodon',
+                                'id': s['id'],
+                                'text': string })
+    results = results + tb
 
-parsed_docs = parsed_headlines + parse(tweets)
-pprint.pprint(parsed_docs)
+parsed_docs = parsed_headlines + parse(results)
+pprint(parsed_docs)
 
 pickleFile = open(os.path.join(pickled_doc_dir, str_date_time + '_docs.pkl'), 'wb')
 pickle.dump(parsed_docs, pickleFile)
