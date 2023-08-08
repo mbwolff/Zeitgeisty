@@ -10,6 +10,7 @@ env/
 
 twitter_creds.py
 twitter_credsPost.py
+mastodon_creds.py
 HF_creds.py
 W2Vmodel
 pickled_kws.pkl
