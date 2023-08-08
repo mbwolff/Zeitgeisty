@@ -120,7 +120,7 @@ for kw, val in sorted(kw_dict.items(), key=lambda e: e[1], reverse=True):
 #                pprint(s)
                 if s['language'] == 'en' and no_repeat(results, s['id']):
                     string = BeautifulSoup(s['content'], "html.parser").text
-                    string = re.sub('https*://[\.\w/\-\?=]+', '', string)
+                    string = re.sub('\w+://[\.\w/\-\?=&]+', '', string)
                     tb.append({ 'source': 'Mastodon',
                                 'id': s['id'],
                                 'text': string })
