@@ -25,7 +25,7 @@ from bs4 import BeautifulSoup
 from mastodon_creds import my_access_token, my_client_id, my_client_secret, my_api_base_url
 from pygooglenews import GoogleNews
 from datetime import datetime
-import pickle, spacy, os, tweepy, time, re, pprint
+import pickle, spacy, os, tweepy, time, re
 
 def get_id_from_last_set_of_docs():
     doc_files = os.listdir(pickled_doc_dir)
