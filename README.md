@@ -8,7 +8,7 @@ This is a bot that generates daily aphorisms from news headlines and social medi
 
 1. Install `Python 3.8` (as a virtual or Paas environment).
 2. Install the Python modules in `requirements.txt`.
-3. Create a `docs` subfolder. This is where content from headlines and Twitter will be archived.
+3. Create a `docs` subfolder. This is where content from headlines and social media (now only Mastodon) will be archived.
 4. Create an `aphorisms` subfolder. This is where lists of aphorisms  will be archived.
 5. Create a `hate_speech` subfolder. This is where aphorisms [classified as hateful](https://huggingface.co/facebook/roberta-hate-speech-dynabench-r4-target) are archived. These aphorisms are not shared publicly.
 5. Rename `mastodon_credsTEMPLATE.py` as `mastodon_creds.py` and supply your personal credentials.
