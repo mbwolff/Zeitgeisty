@@ -25,7 +25,7 @@ def format_date(fname):
 def list_days(days=None):
     days = list()
     files = os.listdir(aphor_dir)
-    files.sort()
+    files.sort(reverse=True)
     for fname in files:
         if fname.endswith('txt'):
             days.append([fname, format_date(fname)])
