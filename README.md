@@ -16,7 +16,7 @@ This is a bot that generates daily aphorisms from news headlines and social medi
 7. Run `pruneDocs.py` to eventually delete news and social media content that is over 90 days old.
 8. Run `buildModel.py` to build the Word2Vec model from the archive in `docs/`.
 9. Run `generateAphorisms.py` for a list of around 200 aphorisms. The code is parameterized to generate a total of at least 50,000 words in 30 days for [NaNoGenMo 2022](https://github.com/NaNoGenMo/2022).
-10. Run `sendToots.py` to share the aphorisms on Twitter, one every 30 minutes.
+10. Run `sendToots.py` to share the aphorisms on Mastodon, one every 30 minutes.
 11. Here is a sample crontab file to automate things:
 ```
 # IMPORTANT NOTE!
