@@ -11,6 +11,7 @@ this notice are preserved. This file is offered as-is, without any warranty.
 #from twitter_credsPost import consumer_key, consumer_secret, access_token, access_token_secret
 from mastodon import Mastodon
 from threads_api.src.threads_api import ThreadsAPI
+import asyncio
 from mastodon_creds import my_access_token, my_client_id, my_client_secret, my_api_base_url, instagram_username, instagram_password
 from config import aphorisms_dir, package_dir
 from time import localtime, sleep
