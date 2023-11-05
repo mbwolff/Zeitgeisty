@@ -10,7 +10,8 @@ this notice are preserved. This file is offered as-is, without any warranty.
 # and access Twitter.
 #from twitter_credsPost import consumer_key, consumer_secret, access_token, access_token_secret
 from mastodon import Mastodon
-from mastodon_creds import my_access_token, my_client_id, my_client_secret, my_api_base_url
+from threads_api.src.threads_api import ThreadsAPI
+from mastodon_creds import my_access_token, my_client_id, my_client_secret, my_api_base_url, instagram_username, instagram_password
 from config import aphorisms_dir, package_dir
 from time import localtime, sleep
 import os, re
@@ -30,6 +31,8 @@ m = Mastodon(
     access_token = my_access_token,
     ratelimit_method = 'pace'
 )
+threads = ThreadsAPI()
+threads.login(instagram_username, instagram_password)
 
 aphor_files = os.listdir(aphorisms_dir)
 aphor_files.sort()
@@ -47,6 +50,7 @@ for aphor in aphors:
             aphor = re.sub('#\s+', '#', aphor)
 #            aphor += "\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu."
             m.status_post(aphor)
+            threads.post(aphor)
 #            response = client.create_tweet(text=aphor.rstrip())
 #            print(f"https://twitter.com/user/status/{response.data['id']}")
             sleep(1800) # wait 30 minutes
