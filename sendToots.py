@@ -63,7 +63,7 @@ async def main():
                 aphor = re.sub('#\s+', '#', aphor)
     #            aphor += "\nFor more Zeitgeisty Aphorisms visit https://zeitgeisty.hartwick.edu."
                 m.status_post(aphor)
-                post2threads(aphor)
+                await post2threads(aphor)
     #            response = client.create_tweet(text=aphor.rstrip())
     #            print(f"https://twitter.com/user/status/{response.data['id']}")
                 sleep(1800) # wait 30 minutes
