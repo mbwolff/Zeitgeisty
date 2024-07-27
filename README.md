@@ -1,6 +1,6 @@
 # Zeitgeisty
 
-This is a bot that generates daily aphorisms from news headlines and social media commentary. It is based on an idea from the Oulipo for inventing aphorisms by using a computer to insert nouns and verbs into formulas. The bot finds words in a Word2Vec model constructed from the headlines and social media statuses. In this way it offers a *zeitgeist* that emerges from the Internet.
+This is a bot that generates daily aphorisms from news headlines and social media commentary. It is based on an idea from the Oulipo for inventing aphorisms by using a computer to insert nouns and verbs into formulas. The bot finds words in a Word2Vec model constructed from headlines and social media statuses. In this way it offers a *zeitgeist* that emerges from the Internet.
 
 [Check it out!](https://zeitgeisty.hartwick.edu/)
 
